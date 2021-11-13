@@ -1,4 +1,5 @@
 import { differenceInDays, formatDistance, format } from "date-fns";
+import { Box } from "theme-ui";
 import AuthorList from "./author-list";
 import Container from "./container";
 import PortableText from "./portableText";
@@ -10,7 +11,7 @@ function BlogPost(props) {
   const { _rawBody, authors, categories, title, mainImage, publishedAt } =
     props;
   return (
-    <article>
+    <Box as="article" bg="red">
       {mainImage && mainImage.asset && (
         <div>
           <img
@@ -52,7 +53,7 @@ function BlogPost(props) {
           </aside>
         </div>
       </Container>
-    </article>
+    </Box>
   );
 }
 

@@ -6,14 +6,8 @@ function BlogPostPreviewGrid(props) {
   return (
     <div>
       {props.title && <h2>{props.title}</h2>}
-      <ul>
-        {props.nodes &&
-          props.nodes.map((node) => (
-            <li key={node.id}>
-              <BlogPostPreview {...node} isInList />
-            </li>
-          ))}
-      </ul>
+      {props.nodes &&
+        props.nodes.map((node) => <BlogPostPreview {...node} isInList />)}
       {props.browseMoreHref && (
         <div>
           <Link to={props.browseMoreHref}>Browse more</Link>

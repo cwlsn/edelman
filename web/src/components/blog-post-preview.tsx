@@ -3,12 +3,13 @@ import { Link } from "gatsby";
 import PortableText from "./portableText";
 import React from "react";
 import { format } from "date-fns";
+import { Box } from "theme-ui";
 import { imageUrlFor } from "../lib/image-url";
 
 function BlogPostPreview(props) {
   return (
     <Link to={getBlogUrl(props.publishedAt, props.slug.current)}>
-      <div>
+      <Box bg="card" sx={{ borderRadius: 1, padding: 3, marginBottom: 3 }}>
         {props.mainImage && props.mainImage.asset && (
           <img
             src={imageUrlFor(buildImageObj(props.mainImage))
@@ -19,8 +20,7 @@ function BlogPostPreview(props) {
             alt={props.mainImage.alt}
           />
         )}
-      </div>
-      <div>
+
         <h3>{props.title}</h3>
         {props._rawExcerpt && (
           <div>
@@ -28,7 +28,7 @@ function BlogPostPreview(props) {
           </div>
         )}
         <div>{format(new Date(props.publishedAt), "MMMM Mo, yyyy")}</div>
-      </div>
+      </Box>
     </Link>
   );
 }
