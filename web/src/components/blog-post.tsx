@@ -1,7 +1,6 @@
 import { differenceInDays, formatDistance, format } from "date-fns";
-import { Box } from "theme-ui";
+import { Box, Image, Flex, Text } from "theme-ui";
 import AuthorList from "./author-list";
-import Container from "./container";
 import PortableText from "./portableText";
 import React from "react";
 import { buildImageObj } from "../lib/helpers";
@@ -11,48 +10,61 @@ function BlogPost(props) {
   const { _rawBody, authors, categories, title, mainImage, publishedAt } =
     props;
   return (
-    <Box as="article" bg="red">
+    <Box as="article">
       {mainImage && mainImage.asset && (
-        <div>
-          <img
-            src={imageUrlFor(buildImageObj(mainImage))
-              .width(1200)
-              .height(Math.floor((9 / 16) * 1200))
-              .fit("crop")
-              .auto("format")
-              .url()}
-            alt={mainImage.alt}
-          />
-        </div>
+        <Image
+          sx={{ borderRadius: 2 }}
+          src={imageUrlFor(buildImageObj(mainImage))
+            .width(1000)
+            .height(Math.floor((9 / 16) * 1000))
+            .fit("crop")
+            .auto("format")
+            .url()}
+          alt={mainImage.alt}
+        />
       )}
-      <Container>
-        <div>
-          <div>
-            <h1>{title}</h1>
-            {_rawBody && <PortableText blocks={_rawBody} />}
-          </div>
-          <aside>
-            {publishedAt && (
-              <div>
-                {differenceInDays(new Date(publishedAt), new Date()) > 3
-                  ? formatDistance(new Date(publishedAt), new Date())
-                  : format(new Date(publishedAt), "MMMM Mo, yyyy")}
-              </div>
-            )}
-            {authors && <AuthorList items={authors} title="Authors" />}
-            {categories && (
-              <div>
-                <h3>Categories</h3>
-                <ul>
-                  {categories.map((category) => (
-                    <li key={category._id}>{category.title}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </aside>
-        </div>
-      </Container>
+      <Text as="h1" variant="postTitle">
+        {title}
+      </Text>
+      {publishedAt && (
+        <Text variant="eyebrow">
+          {differenceInDays(new Date(publishedAt), new Date()) > 3
+            ? formatDistance(new Date(publishedAt), new Date())
+            : format(new Date(publishedAt), "MMMM Mo, yyyy")}
+        </Text>
+      )}
+      <Box>{_rawBody && <PortableText blocks={_rawBody} />}</Box>
+      <Flex
+        as="aside"
+        sx={{
+          bg: "card",
+          borderRadius: 1,
+          padding: 3,
+        }}
+      >
+        {authors && <AuthorList items={authors} title="Authors" />}
+        {categories && (
+          <Box>
+            <Text as="h4" variant="eyebrow" sx={{ marginBottom: 2 }}>
+              Categories
+            </Text>
+            {categories.map((category) => (
+              <Text
+                key={category._id}
+                sx={{
+                  bg: "primaryDark",
+                  padding: 2,
+                  display: "inline-block",
+                  marginRight: 2,
+                  borderRadius: 1,
+                }}
+              >
+                {category.title}
+              </Text>
+            ))}
+          </Box>
+        )}
+      </Flex>
     </Box>
   );
 }

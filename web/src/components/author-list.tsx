@@ -1,38 +1,41 @@
 import React from "react";
+import { Flex, Box, Text, Image } from "theme-ui";
 import { buildImageObj } from "../lib/helpers";
 import { imageUrlFor } from "../lib/image-url";
 
 function AuthorList({ items, title }) {
   return (
-    <div>
-      <h2>{title}</h2>
-      <ul>
-        {items.map(({ author, _key }) => {
-          const authorName = author && author.name;
-          return (
-            <li key={_key}>
-              <div>
-                <div>
-                  {author && author.image && author.image.asset && (
-                    <img
-                      src={imageUrlFor(buildImageObj(author.image))
-                        .width(100)
-                        .height(100)
-                        .fit("crop")
-                        .url()}
-                      alt=""
-                    />
-                  )}
-                </div>
-              </div>
-              <div>
-                <div>{authorName || <em>Missing name</em>}</div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <Box
+      sx={{
+        marginRight: 4,
+        width: "33%",
+        borderRight: "1px solid",
+        borderColor: "border",
+      }}
+    >
+      <Text variant="eyebrow" as="h4">
+        {title}
+      </Text>
+      {items.map(({ author, _key }) => {
+        const authorName = author && author.name;
+        return (
+          <Flex key={_key} sx={{ alignItems: "center", marginTop: 2 }}>
+            {author && author.image && author.image.asset && (
+              <Image
+                sx={{ borderRadius: 999, marginRight: 2 }}
+                src={imageUrlFor(buildImageObj(author.image))
+                  .width(48)
+                  .height(48)
+                  .fit("crop")
+                  .url()}
+                alt=""
+              />
+            )}
+            <Text>{authorName || <em>Missing name</em>}</Text>
+          </Flex>
+        );
+      })}
+    </Box>
   );
 }
 

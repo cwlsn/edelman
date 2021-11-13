@@ -3,7 +3,6 @@ import BlogPost from "../components/blog-post";
 import React from "react";
 import GraphQLErrorList from "../components/graphql-error-list";
 import Layout from "../containers/layout";
-import Container from "../components/container";
 import SEO from "../components/seo";
 import { toPlainText } from "../lib/helpers";
 
@@ -65,17 +64,13 @@ const BlogPostTemplate = (props) => {
       {errors && <SEO title="GraphQL Error" />}
       {post && (
         <SEO
-          title={post.title || "Untitled"}
+          title={post.title || "Yards to Gain"}
           description={toPlainText(post._rawExcerpt)}
           image={post.mainImage}
         />
       )}
 
-      {errors && (
-        <Container>
-          <GraphQLErrorList errors={errors} />
-        </Container>
-      )}
+      {errors && <GraphQLErrorList errors={errors} />}
 
       {post && <BlogPost {...post} />}
     </Layout>
