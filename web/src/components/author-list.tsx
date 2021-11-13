@@ -5,14 +5,7 @@ import { imageUrlFor } from "../lib/image-url";
 
 function AuthorList({ items, title }) {
   return (
-    <Box
-      sx={{
-        marginRight: 4,
-        width: "33%",
-        borderRight: "1px solid",
-        borderColor: "border",
-      }}
-    >
+    <Box sx={{ marginBottom: 3 }}>
       <Text variant="eyebrow" as="h4">
         {title}
       </Text>

@@ -8,14 +8,22 @@ import { imageUrlFor } from "../lib/image-url";
 
 function BlogPostPreview(props) {
   return (
-    <Flex bg="card" sx={{ borderRadius: 1, padding: 3, marginBottom: 3 }}>
+    <Flex
+      bg="card"
+      sx={{
+        borderRadius: 1,
+        padding: 3,
+        marginBottom: 3,
+        flexDirection: ["column", null, "row"],
+      }}
+    >
       {props.mainImage && props.mainImage.asset && (
-        <Box sx={{ width: 400 }}>
+        <Box sx={{ width: ["100%", null, null, 400] }}>
           <Image
             sx={{
               borderRadius: 1,
-              width: 400,
-              height: 225,
+              width: ["100%", null, null, 400],
+              height: ["auto", null, null, 225],
               objectFit: "cover",
             }}
             src={imageUrlFor(buildImageObj(props.mainImage))
@@ -25,7 +33,9 @@ function BlogPostPreview(props) {
           />
         </Box>
       )}
-      <Box sx={{ pl: 3, width: 600 }}>
+      <Box
+        sx={{ pl: [0, 0, 3], pt: [3, 3, 0], width: ["100%", null, null, 600] }}
+      >
         <Text as="h2" variant="postTitle">
           <Link to={getBlogUrl(props.publishedAt, props.slug.current)}>
             {props.title}

@@ -5,7 +5,10 @@ import Logo from "../assets/logo-with-text.svg";
 
 const Layout = ({ children }) => (
   <>
-    <Box mx="auto" sx={{ width: 1000 }}>
+    <Box
+      mx="auto"
+      sx={{ width: ["100%", null, null, 960], paddingX: [3, null, null, 0] }}
+    >
       <Flex
         as="header"
         sx={{

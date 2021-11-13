@@ -40,6 +40,7 @@ function BlogPost(props) {
           bg: "card",
           borderRadius: 1,
           padding: 3,
+          flexDirection: "column",
         }}
       >
         {authors && <AuthorList items={authors} title="Authors" />}
